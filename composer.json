@@ -21,7 +21,7 @@
         "illuminate/contracts": "^10.0 || ^11.0",
         "illuminate/support": "^10.0 || ^11.0",
         "kevinrob/guzzle-cache-middleware": "^5.1",
-        "multiversx/mx-sdk-php": "dev-dev"
+        "multiversx/mx-sdk-php": "dev-main"
     },
     "require-dev": {
         "laravel/pint": "^1.8",
@@ -66,7 +66,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/multiversx/mx-sdk-php"
+            "url": "https://github.com/michavie/mx-sdk-php"
         }
     ]
 }
