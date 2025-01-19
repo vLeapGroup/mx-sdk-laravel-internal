@@ -1,14 +1,14 @@
 <?php
 
 use MultiversX\Address;
-use MultiversX\Auth\NativeAuthDecoded;
+use MultiversX\Signature;
+use MultiversX\SignableMessage;
+use MultiversX\Wallet\UserSigner;
 use MultiversX\Auth\NativeAuthServer;
+use MultiversX\Auth\NativeAuthDecoded;
+use MultiversX\Exceptions\NativeAuthTokenExpiredException;
 use MultiversX\Exceptions\NativeAuthInvalidSignatureException;
 use MultiversX\Exceptions\NativeAuthOriginNotAcceptedException;
-use MultiversX\Exceptions\NativeAuthTokenExpiredException;
-use MultiversX\SignableMessage;
-use MultiversX\Signature;
-use MultiversX\UserSigner;
 
 beforeEach(function () {
     $alicePem = '-----BEGIN PRIVATE KEY for erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th-----
@@ -28,7 +28,7 @@ beforeEach(function () {
         message: $address.$init,
         signature: new Signature(''),
         address: Address::zero(),
-    ))->serializeForSigning())->hex();
+    ))->serializeForSigning());
 
     $this->address = $address;
     $this->signature = $signature;

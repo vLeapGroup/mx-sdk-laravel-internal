@@ -2,16 +2,16 @@
 
 namespace MultiversX\Auth;
 
-use InvalidArgumentException;
-use MultiversX\Address;
 use MultiversX\Bytes;
-use MultiversX\Exceptions\NativeAuthInvalidSignatureException;
-use MultiversX\Exceptions\NativeAuthInvalidTokenTtlException;
-use MultiversX\Exceptions\NativeAuthOriginNotAcceptedException;
-use MultiversX\Exceptions\NativeAuthTokenExpiredException;
-use MultiversX\SignableMessage;
+use MultiversX\Address;
 use MultiversX\Signature;
-use MultiversX\UserVerifier;
+use InvalidArgumentException;
+use MultiversX\SignableMessage;
+use MultiversX\Wallet\UserVerifier;
+use MultiversX\Exceptions\NativeAuthTokenExpiredException;
+use MultiversX\Exceptions\NativeAuthInvalidTokenTtlException;
+use MultiversX\Exceptions\NativeAuthInvalidSignatureException;
+use MultiversX\Exceptions\NativeAuthOriginNotAcceptedException;
 
 class NativeAuthServer
 {
@@ -65,20 +65,20 @@ class NativeAuthServer
         $verifiable = new SignableMessage(
             message: "{$decoded->address}{$decoded->body}",
             signature: new Signature($decoded->signature),
-            address: Address::fromBech32($decoded->address),
+            address: Address::newFromBech32($decoded->address),
         );
 
-        $valid = UserVerifier::fromAddress(Address::fromBech32($decoded->address))
+        $valid = UserVerifier::fromAddress(Address::newFromBech32($decoded->address))
             ->verify(new Bytes($verifiable->serializeForSigning()), new Bytes($verifiable->signature->hex()), $verifiable->address->getPublicKey());
 
         if (! $valid && ! $this->skipLegacyValidation) {
             $verifiable = new SignableMessage(
                 message: "{$decoded->address}{$decoded->body}{}",
                 signature: new Signature($decoded->signature),
-                address: Address::fromBech32($decoded->address),
+                address: Address::newFromBech32($decoded->address),
             );
 
-            $valid = UserVerifier::fromAddress(Address::fromBech32($decoded->address))
+            $valid = UserVerifier::fromAddress(Address::newFromBech32($decoded->address))
                 ->verify(new Bytes($verifiable->serializeForSigning()), new Bytes($verifiable->signature->hex()), $verifiable->address->getPublicKey());
         }
 
