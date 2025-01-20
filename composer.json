@@ -1,11 +1,11 @@
 {
-    "name": "peerme/mx-sdk-laravel",
+    "name": "vleap/mx-sdk-laravel-internal",
     "description": "MultiversX SDK for Laravel (written in PHP).",
     "keywords": [
         "multiversx",
         "laravel"
     ],
-    "homepage": "https://github.com/peermehq/mx-sdk-laravel",
+    "homepage": "https://github.com/vleap/mx-sdk-laravel-internal",
     "license": "MIT",
     "authors": [
         {
