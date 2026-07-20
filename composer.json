@@ -21,7 +21,7 @@
         "illuminate/contracts": "^10.0 || ^11.0 || ^12.0",
         "illuminate/support": "^10.0 || ^11.0 || ^12.0",
         "kevinrob/guzzle-cache-middleware": "^5.1",
-        "vleap/mx-sdk-php-internal": "^0.4.0"
+        "vleap/mx-sdk-php-internal": "^0.4.0 || dev-main@dev"
     },
     "require-dev": {
         "laravel/pint": "^1.8",
